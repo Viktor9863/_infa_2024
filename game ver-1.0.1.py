@@ -44,7 +44,6 @@ class Wall:
         self.color = RED
         self.wall_speed = 5
         self.Call_member_wall = Call_member_wall
-        self.points = [0]
         
     
     def moowe_wall(self):
@@ -59,12 +58,16 @@ class Wall:
         rect(screen, self.color, (self.position_wall_x, self.position_wall_y, self.size_wall_x, self.size_wall_y), 0)
     
     def point(self, radius_unit, pos_unit_x, pos_unit_y):
+        self.points = []
+        self.check = True
         self.place_x = radius_unit + pos_unit_x
         if (self.place_x > self.position_wall_x + self.size_wall_x or\
              self.place_x < self.position_wall_x) and\
             self.position_wall_y - pos_unit_y >= self.wall_speed:
-            self.points.append(10)
-            line(screen, YELLOW, (1000, 100), (1000, 150), 7)
+            while self.check:
+                self.points.append(10)
+                line(screen, YELLOW, (1000, 100), (1000, 150), 7)
+                self.check = False
         else:
             line(screen, RED, (1000, 100), (1000, 150), 7)
 
@@ -100,5 +103,5 @@ while not Finish:
     C.animation_unit()
     pygame.display.update()
     screen.fill(BLACK)
-    print(A.points)
+print(sum(A.points))
 pygame.quit()
